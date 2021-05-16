@@ -16,14 +16,13 @@
         attributionControl: true,
         zoomControl: true,
         layers: [baseTree[0].layer]
-    }),
-        layer;
+    });
 
     // Update base layer crs
 
     map.on('baselayerchange', function (layer) {
 
-        let crs = L.CRS.EPSG3857
+        let crs = L.CRS.EPSG3857;
 
         if (layer.name == '0') {
             crs = L.CRS.EPSG3395;
@@ -171,6 +170,26 @@
 
     };
 
+    let addWeatherTileLayer = function (key, name, layerGroup, color, enabled, callback) {
+
+        let apiKey = 'b7a7cf981372f5c7c58c5c296d6f925f',
+            layer = L.tileLayer('https://tile.openweathermap.org/map/' + key + '/{z}/{x}/{y}.png?appid=' + apiKey);
+
+        if (enabled)
+            layer.addTo(map);
+
+        layerGroup.push({
+            label: '<div class="layer-marker" style="background: ' + color + '"></div>' + name,
+            layer: layer
+        });
+
+        if (callback)
+            callback(layer);
+
+        return layer;
+
+    };
+
     //===============================================================
 
     let infraGroup = {
@@ -193,8 +212,12 @@
         label: 'Места общественного притяжения',
         selectAllCheckbox: false,
         children: []
-    }, CadasterGroup = {
+    }, сadasterGroup = {
         label: 'Оценка качества постановки объектов на кадастровый учет',
+        selectAllCheckbox: false,
+        children: []
+    }, weatherGroup = {
+        label: 'Погода',
         selectAllCheckbox: false,
         children: []
     };
@@ -210,10 +233,16 @@
     addVectorLayer('Tourism', 'Туризм', POIGroup.children, 'yellow', 'point');
     addVectorLayer('Buffer', 'Территория общественного притяжения', POIGroup.children, 'violet', 'layer');
 
-    addVectorLayer('Kadastr_1', '100% - 90%', CadasterGroup.children, 'green', 'layer');
-    addVectorLayer('Kadastr_2', '90% - 60%', CadasterGroup.children, 'lightgreen', 'layer');
-    addVectorLayer('Kadastr_3', '60% - 30%', CadasterGroup.children, 'yellow', 'layer');
-    addVectorLayer('Kadastr_4', '30% - 0%', CadasterGroup.children, 'red', 'layer');
+    addVectorLayer('Kadastr_1', '100% - 90%', сadasterGroup.children, 'green', 'layer');
+    addVectorLayer('Kadastr_2', '90% - 60%', сadasterGroup.children, 'lightgreen', 'layer');
+    addVectorLayer('Kadastr_3', '60% - 30%', сadasterGroup.children, 'yellow', 'layer');
+    addVectorLayer('Kadastr_4', '30% - 0%', сadasterGroup.children, 'red', 'layer');
+
+    addWeatherTileLayer('temp_new', 'Температура', weatherGroup.children, 'transparent');
+    addWeatherTileLayer('clouds_new', 'Облачность', weatherGroup.children, 'transparent');
+    addWeatherTileLayer('precipitation_new', 'Осадки', weatherGroup.children, 'transparent');
+    addWeatherTileLayer('pressure_new', 'Давление', weatherGroup.children, 'transparent');
+    addWeatherTileLayer('wind_new', 'Скорость ветра', weatherGroup.children, 'transparent');
 
     addRasterLayer('Layer_Building', 'Здания и сооружения', objectGroup.children, 'transparent');
     addRasterLayer('Layer_Road', 'Дороги', objectGroup.children, 'transparent');
@@ -231,8 +260,9 @@
     addRasterLayer('Layer_Exposure', 'Экспозиция склона', reliefGroup.children, 'transparent');
 
     overlayTree.push(POIGroup);
-    overlayTree.push(CadasterGroup);
+    overlayTree.push(сadasterGroup);
     overlayTree.push(objectGroup);
+    overlayTree.push(weatherGroup);
 
     baseTree.push({
         label: 'Спутниковые снимки',
