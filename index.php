@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="libs/leaflet-layers-tree/L.Control.Layers.Tree.css">
     <link rel="stylesheet" href="libs/leaflet-easy-button/easy-button.css">
     <link rel="stylesheet" href="libs/sweetalert2/sweetalert2.min.css">
-    <link rel="stylesheet" href="style.css?v=9"/>
+    <link rel="stylesheet" href="style.css?v=10"/>
 
     <link rel="shortcut icon" href="favicon.png" type="image/png" />
 </head>
@@ -30,11 +30,11 @@
 
 <section class="ftco-section" id="buttons">
     <div class="container">
-        <a type="button" class="btn btn-danger mr-md-3 mb-2 mb-md-0" href="download/app-debug.apk">
-            <i class="ion-ios-phone-portrait mr-1"></i> Скачай GeoSirius App
+        <a type="button" class="btn btn-danger mr-3 mb-2" href="download/app-debug.apk">
+            <i class="ion-ios-phone-portrait"></i><span> Скачай GeoSirius App</span>
         </a>
-        <a type="button" class="btn btn-success mr-md-3 mb-2 mb-md-0" href="https://datalens.yandex/3p1mdbbxcnoax" target="_blank">
-            <i class="ion-ios-cloud mr-1"></i> Погода
+        <a type="button" class="btn btn-success mr-3 mb-2" href="https://datalens.yandex/3p1mdbbxcnoax" target="_blank">
+            <i class="ion-ios-cloud"></i><span> Погода</span>
         </a>
     </div>
 </section>
@@ -48,7 +48,7 @@
 <script src="libs/leaflet-easy-button/easy-button.js"></script>
 <script src="libs/sweetalert2/sweetalert2.min.js"></script>
 <script src="libs/js.cookie/js.cookie.js"></script>
-<script src="script.js?v=9"></script>
+<script src="script.js?v=10"></script>
 
 </body>
 </html>

@@ -52,10 +52,23 @@ label {
     margin-right: 3px;
 }
 
-#buttons {
+.ftco-section {
     position: absolute;
     z-index: 600;
     top: 12px;
     left: 50px;
     max-width: calc(100% - 110px);
+}
+
+.ftco-section .btn i {
+    margin-right: .25rem;
+}
+
+@media (max-width: 425px) {
+    .ftco-section .btn span {
+        display: none;
+    }
+    .ftco-section .btn i {
+        margin-right: 0;
+    }
 }
