@@ -31,10 +31,11 @@
 
         if (map.options.crs != crs) {
             let center = map.getCenter(),
-                zoom = map.getZoom();
+                zoom = map.getZoom(),
+                index = parseInt(layer.name);
             map.options.crs = crs;
-            map.removeLayer(baseTree[layer.name].layer);
-            map.addLayer(baseTree[layer.name].layer);
+            map.removeLayer(baseTree[index].layer);
+            map.addLayer(baseTree[index].layer);
             map.setView(center, zoom);
         }
     });
