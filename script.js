@@ -260,11 +260,11 @@
 
     L.easyButton('fa-mobile', function () {
         location.href = 'download/app-debug.apk';
-    }).addTo(map);
+    }, 'Скачать приложение для Android').addTo(map);
 
     L.easyButton('fa-cloud', function () {
         location.href = 'https://datalens.yandex/3p1mdbbxcnoax';
-    }).addTo(map);
+    }, 'Погода').addTo(map);
 
     L.control.layers.tree(baseTree, overlayTree).addTo(map);
     L.control.scale().addTo(map);
