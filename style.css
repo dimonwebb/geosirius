@@ -54,7 +54,8 @@ label {
 
 #buttons {
     position: absolute;
-    z-index: 1000;
-    bottom: 60px;
-    left: 0px;
+    z-index: 600;
+    top: 12px;
+    left: 50px;
+    max-width: calc(100% - 110px);
 }

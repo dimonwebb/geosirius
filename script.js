@@ -257,6 +257,7 @@
     });
     */
 
+    /*
     L.easyButton('fa-mobile', function () {
         location.href = 'download/app-debug.apk';
     }, 'Скачать приложение для Android').addTo(map);
@@ -264,6 +265,7 @@
     L.easyButton('fa-cloud', function () {
         location.href = 'https://datalens.yandex/3p1mdbbxcnoax';
     }, 'Погода').addTo(map);
+    */
 
     L.control.layers.tree(baseTree, overlayTree, {collapsed: true}).addTo(map);
     L.control.scale().addTo(map);
