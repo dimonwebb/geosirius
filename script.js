@@ -23,17 +23,17 @@
 
     map.on('baselayerchange', function (layer) {
 
-        let crs = L.CRS.EPSG3857;
+        let crs = L.CRS.EPSG3857
 
-        if (layer.name == 'Яндекс.Спутник') {
+        if (layer.name == '0') {
             crs = L.CRS.EPSG3395;
         }
 
         if (map.options.crs != crs) {
             let bounds = map.getBounds();
             map.options.crs = crs;
-            map.removeLayer(layer);
-            map.addLayer(layer);
+            map.removeLayer(baseTree[layer.name].layer);
+            map.addLayer(baseTree[layer.name].layer);
             map.fitBounds(bounds);
         }
     });
@@ -91,14 +91,31 @@
 
     // Layers
 
-    let addVectorLayer = function (key, name, layerGroup, color, enabled, callback) {
+    let addVectorLayer = function (key, name, layerGroup, color, style, enabled, callback) {
 
         let layer = L.geoJSON(undefined, {
+            pointToLayer: function(feature, latlng) {
+                if (color != 'transparent') {
+                    let icon = new L.Icon({
+                        iconUrl: 'marker/marker-icon-2x-' + color + '.png',
+                        shadowUrl: 'marker/marker-shadow.png',
+                        iconSize: [25, 41],
+                        iconAnchor: [12, 41],
+                        popupAnchor: [1, -34],
+                        shadowSize: [41, 41]
+                    });
+                    return L.marker(latlng, {icon: icon});
+                }
+                return L.marker(latlng);
+            },
             style: function (feature) {
                 return {
                     fillColor: color,
                     color: color
                 };
+            },
+            onEachFeature: function (feature, layer) {
+                layer.bindPopup(name, {maxWidth: 200});
             }
         });
 
@@ -106,7 +123,7 @@
             layer.addTo(map);
 
         layerGroup.push({
-            label: '<div class="layer-marker" style="background: ' + color + '"></div>' + name,
+            label: '<div class="' + style + '-marker" style="background: ' + color + '"></div>' + name,
             layer: layer
         });
 
@@ -128,7 +145,7 @@
 
     let addRasterLayer = function (key, name, layerGroup, color, enabled, callback) {
 
-        let layer = L.tileLayer.wms('/geoserver/sirius/wms', {
+        let layer = L.tileLayer.wms.colorPicker('/geoserver/sirius/wms', {
                 layers: 'sirius:' + key,
                 format: 'image/png',
                 transparent: true,
@@ -166,33 +183,85 @@
         label: 'Рельеф',
         selectAllCheckbox: false,
         children: []
+    }, objectGroup = {
+        label: 'Автоматическое детектирование объектов',
+        selectAllCheckbox: false,
+        children: []
+    }, POIGroup = {
+        label: 'Места общественного притяжения',
+        selectAllCheckbox: false,
+        children: []
+    }, CadasterGroup = {
+        label: 'Оценка качества постановки объектов на кадастровый учет',
+        selectAllCheckbox: false,
+        children: []
     };
 
-    addVectorLayer('Federal', 'Федеральная территория', overlayTree, 'red', true, function (layer) {
+    addVectorLayer('Federal', 'Федеральная территория', overlayTree, 'red', 'layer', true, function (layer) {
         map.fitBounds(layer.getBounds());
     });
 
-    addRasterLayer('NRG_Fall_Cut', 'Лето', infraGroup.children, 'transparent');
-    addRasterLayer('NRG_Summer_Cut', 'Осень', infraGroup.children, 'transparent');
+    addVectorLayer('POI_shops', 'Магазины', POIGroup.children, 'red', 'point');
+    //addVectorLayer('Social', 'Сфера услуг', POIGroup.children, 'transparent', 'point');
+    addVectorLayer('Leisure', 'Досуг', POIGroup.children, 'green', 'point');
+    addVectorLayer('Sport', 'Спорт', POIGroup.children, 'violet', 'point');
+    addVectorLayer('Tourism', 'Туризм', POIGroup.children, 'yellow', 'point');
+
+    addVectorLayer('Kadastr_1', '100% - 90%', CadasterGroup.children, 'green', 'layer');
+    addVectorLayer('Kadastr_2', '90% - 60%', CadasterGroup.children, 'lightgreen', 'layer');
+    addVectorLayer('Kadastr_3', '60% - 30%', CadasterGroup.children, 'yellow', 'layer');
+    addVectorLayer('Kadastr_4', '30% - 0%', CadasterGroup.children, 'red', 'layer');
+
+    addRasterLayer('Layer_Building', 'Здания и сооружения', objectGroup.children, 'transparent');
+    addRasterLayer('Layer_Road', 'Дороги', objectGroup.children, 'transparent');
+    addRasterLayer('Layer_Forest', 'Древесная растительность', objectGroup.children, 'transparent');
+    addRasterLayer('NRG_Summer_Cut', 'Лето', infraGroup.children, 'transparent');
+    addRasterLayer('NRG_Fall_Cut', 'Осень', infraGroup.children, 'transparent');
     addRasterLayer('NRG_Winter_Cut', 'Зима', infraGroup.children, 'transparent');
-    addRasterLayer('RGB_Fall_Cut', 'Осень', naturalGroup.children, 'transparent');
-    addRasterLayer('RGB_Summer_Cut', 'Лето', naturalGroup.children, 'transparent');
-    addRasterLayer('RGB_Winter_Cut', 'Зима', naturalGroup.children, 'transparent');
     addRasterLayer('Sentinel_NRG_Cut', 'Весна', infraGroup.children, 'transparent');
+    addRasterLayer('RGB_Summer_Cut', 'Лето', naturalGroup.children, 'transparent');
+    addRasterLayer('RGB_Fall_Cut', 'Осень', naturalGroup.children, 'transparent');
+    addRasterLayer('RGB_Winter_Cut', 'Зима', naturalGroup.children, 'transparent');
     addRasterLayer('Sentinel_RGB_Cut', 'Весна', naturalGroup.children, 'transparent');
     addRasterLayer('SRTM30Colored', 'Высота', reliefGroup.children, 'transparent');
     addRasterLayer('SS', 'Крутизна склона', reliefGroup.children, 'transparent');
     addRasterLayer('Layer_Exposure', 'Экспозиция склона', reliefGroup.children, 'transparent');
 
-    // Add controls
+    overlayTree.push(POIGroup);
+    overlayTree.push(CadasterGroup);
+    overlayTree.push(objectGroup);
 
     overlayTree.push({
         label: 'Спутниковые снимки',
+        collapsed: true,
         selectAllCheckbox: false,
         children: [infraGroup, naturalGroup]
     });
 
     overlayTree.push(reliefGroup);
+
+    // Add controls
+    /*
+    map.on("mousemove", function(event) {
+        var a = objectGroup.children[0].layer.getColor(event.latlng);
+        if (a !== null) {
+            var hex = "#" + (0x1000000 + (a[0] << 16) + (a[1] << 8) + a[2]).toString(16).substr(1);
+            var tmpl = "<b style='background:@;color:black;'>@</b>";
+            if (Math.min(a[0], a[1], a[2]) < 0x40) tmpl = tmpl.replace("black", "white");
+            map.attributionControl.setPrefix(tmpl.replace(/@/g, hex));
+        } else {
+            map.attributionControl.setPrefix("unavailable");
+        }
+    });
+    */
+
+    L.easyButton('fa-comment', function () {
+        location.href = 'download/app-debug.apk';
+    }).addTo(map);
+
+    L.easyButton('fa-cloud', function () {
+        location.href = 'https://datalens.yandex/3p1mdbbxcnoax';
+    }).addTo(map);
 
     L.control.layers.tree(baseTree, overlayTree).addTo(map);
     L.control.scale().addTo(map);
