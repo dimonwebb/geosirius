@@ -203,10 +203,11 @@
     });
 
     addVectorLayer('POI_shops', 'Магазины', POIGroup.children, 'red', 'point');
-    //addVectorLayer('Social', 'Сфера услуг', POIGroup.children, 'transparent', 'point');
+    addVectorLayer('Amenity_and_office', 'Сфера услуг', POIGroup.children, 'violet', 'point');
     addVectorLayer('Leisure', 'Досуг', POIGroup.children, 'green', 'point');
-    addVectorLayer('Sport', 'Спорт', POIGroup.children, 'violet', 'point');
+    addVectorLayer('Sport', 'Спорт', POIGroup.children, 'orange', 'point');
     addVectorLayer('Tourism', 'Туризм', POIGroup.children, 'yellow', 'point');
+    addVectorLayer('Buffer', 'Территория общественного притяжения', POIGroup.children, 'violet', 'layer');
 
     addVectorLayer('Kadastr_1', '100% - 90%', CadasterGroup.children, 'green', 'layer');
     addVectorLayer('Kadastr_2', '90% - 60%', CadasterGroup.children, 'lightgreen', 'layer');
