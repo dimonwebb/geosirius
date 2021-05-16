@@ -43,3 +43,18 @@ html, body, #map {
 body.swal2-height-auto{
     height: 100%!important;
 }
+
+label {
+    margin-bottom: 0;
+}
+
+.leaflet-control-layers-selector {
+    margin-right: 3px;
+}
+
+#buttons {
+    position: absolute;
+    z-index: 1000;
+    bottom: 60px;
+    left: 0px;
+}

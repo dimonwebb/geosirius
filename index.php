@@ -10,7 +10,9 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="libs/moment/moment-with-locales.min.js"></script>
 
+    <link rel="stylesheet" href="libs/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="libs/ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
     <link rel="stylesheet" href="libs/markercluster/MarkerCluster.css"/>
     <link rel="stylesheet" href="libs/markercluster/MarkerCluster.Default.css"/>
@@ -23,7 +25,16 @@
     <link rel="shortcut icon" href="favicon.png" type="image/png" />
 </head>
 <body>
+
 <div id="map"></div>
+
+<section class="ftco-section" id="buttons">
+    <div class="container">
+        <a type="button" class="btn btn-danger mr-md-3 mb-2 mb-md-0" href="download/app-debug.apk">
+            <i class="ion-ios-heart mr-1"></i> Скачай GeoSirius App
+        </a>
+</section>
+
 <!-- Yandex.Metrika counter --> <script type="text/javascript" > (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)}) (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym"); ym(78650634, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, trackHash:true }); </script> <noscript><div><img src="https://mc.yandex.ru/watch/78650634" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 <script src="libs/markercluster/leaflet.markercluster.js"></script>
@@ -34,5 +45,6 @@
 <script src="libs/sweetalert2/sweetalert2.min.js"></script>
 <script src="libs/js.cookie/js.cookie.js"></script>
 <script src="script.js?v=8"></script>
+
 </body>
 </html>

@@ -265,7 +265,7 @@
         location.href = 'https://datalens.yandex/3p1mdbbxcnoax';
     }, 'Погода').addTo(map);
 
-    L.control.layers.tree(baseTree, overlayTree).addTo(map);
+    L.control.layers.tree(baseTree, overlayTree, {collapsed: true}).addTo(map);
     L.control.scale().addTo(map);
     //L.control.mousePosition().addTo(map);
 
