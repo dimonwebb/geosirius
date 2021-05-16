@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="libs/leaflet-layers-tree/L.Control.Layers.Tree.css">
     <link rel="stylesheet" href="libs/leaflet-easy-button/easy-button.css">
     <link rel="stylesheet" href="libs/sweetalert2/sweetalert2.min.css">
-    <link rel="stylesheet" href="style.css?v=10"/>
+    <link rel="stylesheet" href="style.css?v=11"/>
 
     <link rel="shortcut icon" href="favicon.png" type="image/png" />
 </head>
@@ -48,7 +48,7 @@
 <script src="libs/leaflet-easy-button/easy-button.js"></script>
 <script src="libs/sweetalert2/sweetalert2.min.js"></script>
 <script src="libs/js.cookie/js.cookie.js"></script>
-<script src="script.js?v=10"></script>
+<script src="script.js?v=11"></script>
 
 </body>
 </html>
