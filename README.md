@@ -1,6 +1,6 @@
 # GeoSirius
 
-Frontend code for GeoSirius portal App.
+GeoSirius portal and App.
 
 ## Requirements
 

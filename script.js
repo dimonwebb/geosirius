@@ -30,11 +30,14 @@
         }
 
         if (map.options.crs != crs) {
-            let bounds = map.getBounds();
+            let center = map.getCenter(),
+                zoom = map.getZoom();
             map.options.crs = crs;
             map.removeLayer(baseTree[layer.name].layer);
             map.addLayer(baseTree[layer.name].layer);
-            map.fitBounds(bounds);
+            setTimeout(function () {
+                map.setView(center, zoom);
+            }, 100);
         }
     });
 
@@ -231,7 +234,7 @@
     overlayTree.push(CadasterGroup);
     overlayTree.push(objectGroup);
 
-    overlayTree.push({
+    baseTree.push({
         label: 'Спутниковые снимки',
         collapsed: true,
         selectAllCheckbox: false,
@@ -255,7 +258,7 @@
     });
     */
 
-    L.easyButton('fa-comment', function () {
+    L.easyButton('fa-mobile', function () {
         location.href = 'download/app-debug.apk';
     }).addTo(map);
 
@@ -265,6 +268,6 @@
 
     L.control.layers.tree(baseTree, overlayTree).addTo(map);
     L.control.scale().addTo(map);
-    L.control.mousePosition().addTo(map);
+    //L.control.mousePosition().addTo(map);
 
 }).call(this);
