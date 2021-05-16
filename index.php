@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="libs/leaflet-mouse/leaflet-mouse.css">
     <link rel="stylesheet" href="libs/leaflet-layers-tree/L.Control.Layers.Tree.css">
     <link rel="stylesheet" href="libs/leaflet-easy-button/easy-button.css">
-    <link rel="stylesheet" href="style.css?v=7"/>
+    <link rel="stylesheet" href="libs/sweetalert2/sweetalert2.min.css">
+    <link rel="stylesheet" href="style.css?v=8"/>
 
     <link rel="shortcut icon" href="favicon.png" type="image/png" />
 </head>
@@ -30,6 +31,8 @@
 <script src="libs/leaflet-layers-tree/L.Control.Layers.Tree.js"></script>
 <script src="libs/leaflet-tilelayer-colorpicker/leaflet-tilelayer-colorpicker.js"></script>
 <script src="libs/leaflet-easy-button/easy-button.js"></script>
-<script src="script.js?v=7"></script>
+<script src="libs/sweetalert2/sweetalert2.min.js"></script>
+<script src="libs/js.cookie/js.cookie.js"></script>
+<script src="script.js?v=8"></script>
 </body>
 </html>

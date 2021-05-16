@@ -35,3 +35,11 @@ html, body, #map {
     position: relative;
     bottom: -2px;
 }
+
+.swal2-container {
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+body.swal2-height-auto{
+    height: 100%!important;
+}

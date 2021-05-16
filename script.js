@@ -269,4 +269,15 @@
     L.control.scale().addTo(map);
     //L.control.mousePosition().addTo(map);
 
+    if (!Cookies.get('hello-ok')) {
+        Swal.fire({
+            title: 'Добро пожаловать!',
+            html: 'Вы попали на геопортал Федеральной территории Сириус. Здесь вы можете получить актуальную информацию, провести аналитическое исследование и оставить свои отзывы с помощью мобильного приложения.',
+            type: 'success',
+            confirmButtonText: 'Начать работу'
+        }).then(function (t) {
+            Cookies.set('hello-ok', true, {path: '/'});
+        });
+    }
+
 }).call(this);
