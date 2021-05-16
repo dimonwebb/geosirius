@@ -35,9 +35,7 @@
             map.options.crs = crs;
             map.removeLayer(baseTree[layer.name].layer);
             map.addLayer(baseTree[layer.name].layer);
-            setTimeout(function () {
-                map.setView(center, zoom);
-            }, 100);
+            map.setView(center, zoom);
         }
     });
 
