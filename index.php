@@ -48,6 +48,7 @@
 <script src="libs/leaflet-easy-button/easy-button.js"></script>
 <script src="libs/sweetalert2/sweetalert2.min.js"></script>
 <script src="libs/js.cookie/js.cookie.js"></script>
+<script src="libs/leaflet-hash/leaflet-hash.js"></script>
 <script src="script.js?v=11"></script>
 
 </body>

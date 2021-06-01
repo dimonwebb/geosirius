@@ -301,6 +301,7 @@
     L.control.layers.tree(baseTree, overlayTree, {collapsed: true}).addTo(map);
     L.control.scale().addTo(map);
     //L.control.mousePosition().addTo(map);
+    let hash = new L.Hash(map);
 
     if (!Cookies.get('hello-ok')) {
         Swal.fire({
